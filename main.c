@@ -14,8 +14,8 @@ int main() {
   print_library(library);
 
   for (i = 0;i < 10; i++){
+    printf("\n\nInserting: <%s>, <%s>, This is element %d\n",songs[i],artists[i],i);
     library = add_song_alphabet(library,songs[i],artists[i]);
-    printf("\n\nInserting: <%s>, <%s>\n",songs[i],artists[i]);
     print_library(library);
   }
 
