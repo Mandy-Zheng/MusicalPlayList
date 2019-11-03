@@ -14,12 +14,12 @@ int main() {
   print_library(library);
 
   for (i = 0;i < 10; i++){
-    library = add_song(library,songs[i],artists[i]);
+    library = add_song_alphabet(library,songs[i],artists[i]);
     printf("\n\nInserting: <%s>, <%s>\n",songs[i],artists[i]);
     print_library(library);
   }
 
-  for(i = 3; i < 7; i++){
+  /*for(i = 3; i < 7; i++){
     library = remove_song(library, songs[i],artists[i]);
     printf("\n\nRemoving: <%s>, <%s>\n",songs[i],artists[i]);
     print_library(library);
@@ -27,6 +27,6 @@ int main() {
     library = free_library(library);
     printf("\n\nEmptying library ... Printing Emptied library: \n");
     print_library(library);
-    
+*/
   return 0;
 }

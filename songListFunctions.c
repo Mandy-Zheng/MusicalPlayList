@@ -28,7 +28,7 @@ void print_library(struct song_node *p){
 struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], char artist_name[100]){
   struct song_node *pnew;
   struct song_node *looper=p;
-  struct song_node *recorder;
+  struct song_node *recorder=NULL;
   pnew=malloc(sizeof(struct song_node));
   strcpy(pnew->name,song_name);
   strcpy(pnew->artist,artist_name);
@@ -36,22 +36,27 @@ struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], c
     if(strcmp(looper->artist,artist_name)==0){
       if(strcmp(looper->name,song_name)>0){
         connectNodes(recorder,pnew,looper);
-        break;
+        return p;
       }else{
         connectNodes(looper,pnew,looper->next);
-        break;
+        return p;
       }
     }else if(strcmp(looper->artist,artist_name)>0){
-      connectNodes(recorder,pnew,looper);
-      break;
+      if(recorder==NULL){
+        pnew->next=looper;
+        return pnew;
+      }else{
+        connectNodes(recorder,pnew,looper);
+        return p;
+      }
     }else{
       connectNodes(looper,pnew,looper->next);
-      break;
+      return p;
     }
     recorder=looper;
     looper=looper->next;
   }
-  return p;
+  return pnew;
 }
 void connectNodes(struct song_node *p,struct song_node *q,struct song_node *r){
   p->next=q;
