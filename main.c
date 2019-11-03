@@ -10,39 +10,39 @@ int main() {
   struct song_node *library = NULL;
   int i;
 
-  printf("\nInitial library <empty>\n");
+  printf("\n\nInitial library <empty>\n\n");
   printf("Value of library:");
   print_library(library);
 
   for (i = 0;i < 10; i++){
     library = add_song(library,songs[i],artists[i]);
-    printf("\nInserting at the front, Value: <%s>, <%s>\n",songs[i],artists[i]);
+    printf("\n\nInserting at the front, Value: <%s>, <%s>\n\n",songs[i],artists[i]);
     printf("Value of library: ");
     print_library(library);
   }
 
   for(i = 0; i < 2; i++){
     library = remove_song(library, songs[i],artists[i]);
-    printf("\nRemoving from the front, Value: <%s>, <%s>\n",songs[i],artists[i]);
+    printf("\n\nRemoving from the front, Value: <%s>, <%s>\n\n",songs[i],artists[i]);
     printf("Value of library: ");
     print_library(library);
   }
 
   for(i = 3; i < 5; i++){
     library = remove_song(library, songs[i],artists[i]);
-    printf("\nRemoving from the middle, Value: <%s>, <%s>\n",songs[i],artists[i]);
+    printf("\n\nRemoving from the middle, Value: <%s>, <%s>\n\n",songs[i],artists[i]);
     printf("Value of library: ");
     print_library(library);
   }
 
   for(i = 9; i > 7; i--){
     library = remove_song(library, songs[i],artists[i]);
-    printf("\nRemoving from the end, Value: <%s>, <%s>\n",songs[i],artists[i]);
+    printf("\n\nRemoving from the end, Value: <%s>, <%s>\n\n",songs[i],artists[i]);
     printf("Value of library: ");
     print_library(library);
   }
     library = free_library(library);
-    printf("\nEmptying library ... Printing Emptied library: \n");
+    printf("\n\nEmptying library ... Printing Emptied library: \n\n");
     print_library(library);
   return 0;
 }
