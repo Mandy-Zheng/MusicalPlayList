@@ -39,6 +39,27 @@ struct song_node * add_song(struct song_node *p, char song_name[100], char artis
   return pnew;
 }
 
+struct node * remove_song(struct node *libary, char song_name[100], char artist_name[100]){
+  struct node * current_song = library;
+  struct node * placeholder;
+  if(strcmp(current_song->name,song_name)){ //if I have to remove front node, it's a special case
+    library = library->next;
+    free(current_song);
+    return library;
+  }
+  while(current_song->next != NULL){ //else, loop through, checking if my next node has to be removed
+    if (current_song->next->i data){ //if it does have to be removed, relink neccesary nodes, and free node
+      placeholder = p->next;
+      p->next = p->next->next;
+      p = p->next;
+      free(placeholder);
+      return front;
+    } else{ //if not, move on to next node
+      p = p->next;
+    }
+  }
+  return front;
+}
 
 /*struct node * free_list(struct node* p){
   struct node* sub;
