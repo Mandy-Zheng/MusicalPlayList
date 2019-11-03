@@ -34,6 +34,17 @@ struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], c
   strcpy(pnew->artist,artist_name);
   while(looper !=NULL){
     //printf("%d\n",strcmp(looper->artist,artist_name) );
+    if(strcmp(looper->artist,artist_name)>0){
+      if(recorder==NULL){
+        pnew->next=looper;
+        //printf("%s\n",pnew->next->artist);
+        p=pnew;
+        return pnew;
+      }else{
+        connectNodes(recorder,pnew,looper);
+        return p;
+      }
+    }
     if(strcmp(looper->artist,artist_name)==0){
       if(strcmp(looper->name,song_name)>0){
         if(recorder==NULL){
@@ -45,17 +56,6 @@ struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], c
         }
       }else{
         connectNodes(looper,pnew,looper->next);
-        return p;
-      }
-    }
-    if(strcmp(looper->artist,artist_name)>0){
-      if(recorder==NULL){
-        pnew->next=looper;
-        //printf("%s\n",pnew->next->artist);
-        p=pnew;
-        return pnew;
-      }else{
-        connectNodes(recorder,pnew,looper);
         return p;
       }
     }
@@ -83,7 +83,7 @@ struct song_node * add_song(struct song_node *p, char song_name[100], char artis
 }
 
 struct song_node * find_song(struct song_node *p,char song_name[100], char artist_name[100]){
-  struct song_node *looper;
+  struct song_node *looper=p;
   while(looper !=NULL){
     if(strcmp(looper->artist,artist_name) == 0 && strcmp(looper->name,song_name) == 0){
       return looper;
@@ -93,7 +93,7 @@ struct song_node * find_song(struct song_node *p,char song_name[100], char artis
   return looper;
 }
 struct song_node * find_first_song(struct song_node *p,char artist_name[100]){
-  struct song_node *looper;
+  struct song_node *looper=p;
   while(looper !=NULL){
     if(strcmp(looper->artist,artist_name) == 0){
       return looper;
