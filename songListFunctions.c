@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
+#include "songListHeader.h"
 //struct song_node{
 //  char name[100];
 //  char artist[100];
 //  struct song_node *next;
 //};
 
-void print_list(struct song_node *p){
+void print_library(struct song_node *p){
   printf("[");
   struct song_node *temp=p;
   while (temp!=NULL) {
@@ -30,28 +32,30 @@ struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], c
   pnew=malloc(sizeof(struct song_node));
   pnew->name=song_name;
   pnew->artist=artist_name;
-  boolean inserted=false;
   while(looper !=NULL && inserted){
     if(strcmp(looper->artist,artist_name)==0){
       if(strcmp(looper->name,song_name)>0){
-        inserted=connectNodes(recorder,pnew,looper);
+        connectNodes(recorder,pnew,looper);
+        break;
       }else{
-        inserted=connectNodes(looper,pnew,looper->next);
+        connectNodes(looper,pnew,looper->next);
+        break;
       }
     }else if(strcmp(looper->artist,artist_name)>0){
-      inserted=connectNodes(recorder,pnew,looper);
+      connectNodes(recorder,pnew,looper);
+      break;
     }else{
-      inserted=connectNodes(looper,pnew,looper->next);
+      connectNodes(looper,pnew,looper->next);
+      break;
     }
     recorder=looper;
     looper=loopoer->next
   }
   return p;
 }
-boolean connectNodes(struct song_node *p,struct song_node *q,struct song_node *r){
+void connectNodes(struct song_node *p,struct song_node *q,struct song_node *r){
   p->next=q;
   q->next=r;
-  return true;
 }
 struct song_node * add_song(struct song_node *p, char song_name[100], char artist_name[100]){
   struct song_node *pnew;
@@ -84,9 +88,9 @@ struct song_node * find_first_song(struct song_node *p,char artist_name[100]){
 }
 
 
-struct song_node * remove_song (struct node *libary, char song_name[100], char artist_name[100]){
-  struct node * current_song = library;
-  struct node * placeholder;
+struct song_node * remove_song (struct song_node *library, char song_name[100], char artist_name[100]){
+  struct song_node * current_song = library;
+  struct song_node * placeholder;
   if(strcmp(current_song->name,song_name) + strcmp(current_song->artist,artist_name) == 0){ //if I have to remove front node, it's a special case
     library = library->next;
     free(current_song);
@@ -106,8 +110,8 @@ struct song_node * remove_song (struct node *libary, char song_name[100], char a
   return library;
 }
 
-struct song_node * free_list(struct node* library){
-  struct node* sub;
+struct song_node * free_list(struct song_node* library){
+  struct song_node* sub;
   while (p!=NULL) {
     sub=libary;
     printf("Freeing: %d\n", libray->i);

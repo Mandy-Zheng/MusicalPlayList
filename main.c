@@ -6,42 +6,42 @@
 
 int main() {
 
-  struct song_node *libray = NULL;
+  struct song_node *library = NULL;
   int i;
 
-  printf("\nInitial List <empty>\n");
-  printf("Value of List:");
-  print_list(list);
+  printf("\nInitial library <empty>\n");
+  printf("Value of library:");
+  print_library(library);
 
   for (i = 9;i > -1; i--){
-    list = add_song(list,i,i);
+    library = add_song(library,i,i);
     printf("\nInserting at the front, Value: <%d>\n",i);
-    printf("Value of List: ");
-    print_list(list);
+    printf("Value of library: ");
+    print_library(library);
   }
 
   for(i = 0; i < 2; i++){
-    list = remove_song(list, i,i);
+    library = remove_song(library, i,i);
     printf("\nRemoving from the front, Value: <%d>\n",i);
-    printf("Value of List: ");
-    print_list(list);
+    printf("Value of library: ");
+    print_library(library);
   }
 
   for(i = 3; i < 5; i++){
-    list = remove_song(list, i,i);
+    library = remove_song(library, i,i);
     printf("\nRemoving from the middle, Value: <%d>\n",i);
-    printf("Value of List: ");
-    print_list(list);
+    printf("Value of library: ");
+    print_library(library);
   }
 
   for(i = 9; i > 7; i--){
-    list = remove_song(list, i,i);
+    library = remove_song(library, i,i);
     printf("\nRemoving from the end, Value: <%d>\n",i);
-    printf("Value of List: ");
-    print_list(list);
+    printf("Value of library: ");
+    print_library(library);
   }
-    list = free_list(list);
-    printf("\nEmptying List ... Printing Emptied List: \n");
-    print_list(list);
+    library = free_library(library);
+    printf("\nEmptying library ... Printing Emptied library: \n");
+    print_library(library);
   return 0;
 }
