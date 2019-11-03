@@ -24,13 +24,13 @@ int main() {
 
   srand(time(0));
   for (i = 0;i < 3; i++){
-    random = random_song(library, rand());
+    random = random_node(library, rand());
     printf("\n\nReturn random song: %s, %s\n",random->name, random->artist);
   }
 
   for (i = 0;i < 10; i++){
     printf("\n\nFinding: <%s>, <%s>, This is element %d\n",songs[i],artists[i],i);
-    if( find_song(library,songs[i],artists[i]) !=NULL){
+    if( find_node(library,songs[i],artists[i]) !=NULL){
       printf("FOUND IT\n");
     }else{
       printf("YOU SUCK\n" );

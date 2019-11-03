@@ -11,7 +11,7 @@
 //  struct song_node *next;
 //};
 
-void print_library(struct song_node *p){
+void print_list(struct song_node *p){
   printf("[");
   struct song_node *temp=p;
   while (temp!=NULL) {
@@ -25,7 +25,7 @@ void print_library(struct song_node *p){
   }
   printf("]");
 }
-struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], char artist_name[100]){
+struct song_node * add_node_alphabet(struct song_node *p, char song_name[100], char artist_name[100]){
   struct song_node *pnew;
   struct song_node *looper=p;
   struct song_node *recorder=NULL;
@@ -73,7 +73,7 @@ void connectNodes(struct song_node *p,struct song_node *q,struct song_node *r){
   p->next=q;
   q->next=r;
 }
-struct song_node * add_song(struct song_node *p, char song_name[100], char artist_name[100]){
+struct song_node * add_node_front(struct song_node *p, char song_name[100], char artist_name[100]){
   struct song_node *pnew;
   pnew=malloc(sizeof(struct song_node));
   strcpy(pnew->name,song_name);
@@ -82,7 +82,7 @@ struct song_node * add_song(struct song_node *p, char song_name[100], char artis
   return pnew;
 }
 
-struct song_node * find_song(struct song_node *p,char song_name[100], char artist_name[100]){
+struct song_node * find_node(struct song_node *p,char song_name[100], char artist_name[100]){
   struct song_node *looper=p;
   while(looper !=NULL){
     if(strcmp(looper->artist,artist_name) == 0 && strcmp(looper->name,song_name) == 0){
@@ -92,7 +92,7 @@ struct song_node * find_song(struct song_node *p,char song_name[100], char artis
   }
   return looper;
 }
-struct song_node * find_first_song(struct song_node *p,char artist_name[100]){
+struct song_node * find_first_node(struct song_node *p,char artist_name[100]){
   struct song_node *looper=p;
   while(looper !=NULL){
     if(strcmp(looper->artist,artist_name) == 0){
@@ -104,54 +104,53 @@ struct song_node * find_first_song(struct song_node *p,char artist_name[100]){
 }
 
 
-struct song_node * remove_song (struct song_node *library, char song_name[100], char artist_name[100]){
-  struct song_node * current_song = library;
+struct song_node * remove_node (struct song_node *list, char song_name[100], char artist_name[100]){
+  struct song_node * current_song = list;
   struct song_node * placeholder;
   if(strcmp(current_song->name,song_name) == 0 && strcmp(current_song->artist,artist_name) == 0){ //if I have to remove front node, it's a special case
-    library = library->next;
+    list = list->next;
     free(current_song);
-    return library;
+    return list;
   }
   while(current_song->next != NULL){ //else, loop through, checking if my next node has to be removed
     if (strcmp(current_song->next->name,song_name) == 0 && strcmp(current_song->next->artist,artist_name) == 0){ //if it does have to be removed, relink neccesary nodes, and free node
       placeholder = current_song->next;
       current_song->next = current_song->next->next;
       free(placeholder);
-      return library;
+      return list;
     } else{ //if not, move on to next node
       current_song = current_song->next;
     }
   }
-  return library;
+  return list;
 }
 
-struct song_node * free_library(struct song_node* library){
+struct song_node * free_list(struct song_node* list){
   struct song_node* sub;
-  while (library!=NULL) {
-    sub=library;
-    printf("Freeing: %s, %s\n", library->name, library->artist);
-    library=library->next;
+  while (list!=NULL) {
+    sub=list;
+    printf("Freeing: %s, %s\n", list->name, list->artist);
+    list=list->next;
     free(sub);
   }
-  return library;
+  return list;
 }
 
-struct song_node * random_song(struct song_node *library, int random){
-  struct song_node *looper=library;
+struct song_node * random_node(struct song_node *list, int random){
+  struct song_node *looper=list;
   int size=0;
   while(looper != NULL){
       size++;
       looper = looper->next;
     }
   random = random%size;
-  int count = 0;
-  looper=library;
-  while(looper != NULL){
+  int count;
+  looper=list;
+  for(count = 0;looper != NULL;count++){
     if(count == random){
       return looper;
     }
     looper=looper->next;
-    count++;
   }
-  return library;
+  return list;
 }
