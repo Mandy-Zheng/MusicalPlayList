@@ -12,87 +12,73 @@
 //  struct song_node *next;
 //};
 
-void print_library(struct song_node *p){
-  print_library(p);
-}
-struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], char artist_name[100]){
-  struct song_node *pnew;
-  struct song_node *looper=p;
-  struct song_node *recorder=NULL;
-  pnew=malloc(sizeof(struct song_node));
-  strcpy(pnew->name,song_name);
-  strcpy(pnew->artist,artist_name);
-  while(looper !=NULL){
-    //printf("%d\n",strcmp(looper->artist,artist_name) );
-    if(strcmp(looper->artist,artist_name)>0){
-      if(recorder==NULL){
-        pnew->next=looper;
-        //printf("%s\n",pnew->next->artist);
-        p=pnew;
-        return pnew;
-      }else{
-        connectNodes(recorder,pnew,looper);
-        return p;
-      }
-    }
-    if(strcmp(looper->artist,artist_name)==0){
-      if(strcmp(looper->name,song_name)>0){
-        if(recorder==NULL){
-          pnew->next=looper;
-          return pnew;
-        }else{
-          connectNodes(recorder,pnew,looper);
-          return p;
-        }
-      }else{
-        connectNodes(looper,pnew,looper->next);
-        return p;
-      }
-    }
-    recorder=looper;
-    looper=looper->next;
+void print_library(struct song_node library[27]){
+  int i;
+  for (i = 0; i < 27; i++) {
+    printf("%c list:\n",(library[i]->artist)[0]);
+    print_list(library[i]);
+    printf("\n");
   }
-  if(recorder!=NULL){
-    //printf("whats");
-    recorder->next=pnew;
-    return p;
-  }
-  return pnew;
-}
-void connectNodes(struct song_node *p,struct song_node *q,struct song_node *r){
-  p->next=q;
-  q->next=r;
-}
-struct song_node * add_song(struct song_node *p, char song_name[100], char artist_name[100]){
-  struct song_node *pnew;
-  pnew=malloc(sizeof(struct song_node));
-  strcpy(pnew->name,song_name);
-  strcpy(pnew->artist,artist_name);
-  pnew->next=p;
-  return pnew;
 }
 
-struct song_node * find_song(struct song_node *p,char song_name[100], char artist_name[100]){
-  struct song_node *looper=p;
-  while(looper !=NULL){
-    if(strcmp(looper->artist,artist_name) == 0 && strcmp(looper->name,song_name) == 0){
-      return looper;
+void print_artist(struct song_node library[27], char artist_name[100]){
+  int index;
+  printf("%s list:\n",artist_name);
+  if(artist_name[0]-97<0){
+    index=26;
+  }else{
+    index=artist_name[0]-97;
+  }
+  struct song_node * looper=library[index];
+  printf("[");
+  while(looper != NULL && strcmp(looper->artist,artist_name)==0){
+    if (looper==library[index]){
+      printf("%s: %s",looper->artist,looper->name);
+    }
+    else{
+      printf(" | %s: %s",looper->artist,looper->name);
     }
     looper=looper->next;
   }
-  return looper;
+  printf("]");
 }
-struct song_node * find_first_song(struct song_node *p,char artist_name[100]){
-  struct song_node *looper=p;
-  while(looper !=NULL){
-    if(strcmp(looper->artist,artist_name) == 0){
-      return looper;
-    }
-    looper=looper->next;
-  }
-  return looper;
+void print_letter(struct song_node library[27], char x){
+  int i= x;
+  printf("%c list:\n",i);
+  print_list(library[i]);
+  printf("\n");
 }
 
+
+struct song_node * find_song_lib(struct song_node library[27],char song_name[100], char artist_name[100]){
+  if(artist_name[0]-97<0){
+    return find_song(library[26],song_name,artist_name);
+  }else{
+    return find_song(library[artist_name[0]-97],song_name,artist_name);
+  }
+}
+struct song_node * find_artist_lib(struct song_node library[27],char artist_name[100]){
+  if(artist_name[0]-97<0){
+    return find_artist_song(library[26],artist_name);
+  }else{
+    return find_artist_song(library[artist_name[0]-97],artist_name);
+  }
+}
+
+struct song_node * add_song_lib(struct song_node library[27], char song_name[100], char artist_name[100]){
+  if(artist_name[0]-97<0){
+    add_node_alphabet(library[26], song_name, artist_name);
+    return library;
+  }else{
+    if(artist_name[0]-97 == 0 ){
+      return add_node_alphabet(library[artist_name[0]-97], song_name, artist_name);
+    }else{
+      add_node_alphabet(library[artist_name[0]-97], song_name, artist_name);
+      return library;
+    }
+  }
+
+}
 
 struct song_node * remove_song (struct song_node *library, char song_name[100], char artist_name[100]){
   struct song_node * current_song = library;

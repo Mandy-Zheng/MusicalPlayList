@@ -92,7 +92,7 @@ struct song_node * find_node(struct song_node *p,char song_name[100], char artis
   }
   return looper;
 }
-struct song_node * find_first_node(struct song_node *p,char artist_name[100]){
+struct song_node * find_artist_song(struct song_node *p,char artist_name[100]){
   struct song_node *looper=p;
   while(looper !=NULL){
     if(strcmp(looper->artist,artist_name) == 0){
