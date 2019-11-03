@@ -27,5 +27,6 @@ int main() {
     library = free_library(library);
     printf("\n\nEmptying library ... Printing Emptied library: \n");
     print_library(library);
+    
   return 0;
 }

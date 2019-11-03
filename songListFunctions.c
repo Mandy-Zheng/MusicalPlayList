@@ -16,10 +16,10 @@ void print_library(struct song_node *p){
   struct song_node *temp=p;
   while (temp!=NULL) {
     if (temp==p){
-      printf("%s: %s ",temp->artist,temp->name);
+      printf("%s: %s",temp->artist,temp->name);
     }
     else{
-      printf("| %s: %s",temp->artist,temp->name);
+      printf(" | %s: %s",temp->artist,temp->name);
     }
     temp=temp->next;
   }
@@ -30,9 +30,9 @@ struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], c
   struct song_node *looper=p;
   struct song_node *recorder;
   pnew=malloc(sizeof(struct song_node));
-  pnew->name=song_name;
-  pnew->artist=artist_name;
-  while(looper !=NULL && inserted){
+  strcpy(pnew->name,song_name);
+  strcpy(pnew->artist,artist_name);
+  while(looper !=NULL){
     if(strcmp(looper->artist,artist_name)==0){
       if(strcmp(looper->name,song_name)>0){
         connectNodes(recorder,pnew,looper);
@@ -49,7 +49,7 @@ struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], c
       break;
     }
     recorder=looper;
-    looper=loopoer->next
+    looper=looper->next;
   }
   return p;
 }
@@ -60,8 +60,8 @@ void connectNodes(struct song_node *p,struct song_node *q,struct song_node *r){
 struct song_node * add_song(struct song_node *p, char song_name[100], char artist_name[100]){
   struct song_node *pnew;
   pnew=malloc(sizeof(struct song_node));
-  pnew->name=song_name;
-  pnew->artist=artist_name;
+  strcpy(pnew->name,song_name);
+  strcpy(pnew->artist,artist_name);
   pnew->next=p;
   return pnew;
 }
@@ -110,7 +110,7 @@ struct song_node * remove_song (struct song_node *library, char song_name[100], 
   return library;
 }
 
-struct song_node * free_list(struct song_node* library){
+struct song_node * free_library(struct song_node* library){
   struct song_node* sub;
   while (library!=NULL) {
     sub=library;
