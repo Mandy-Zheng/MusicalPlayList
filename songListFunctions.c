@@ -39,60 +39,35 @@ struct song_node * add_song(struct song_node *p, char song_name[100], char artis
   return pnew;
 }
 
-struct node * remove_song(struct node *libary, char song_name[100], char artist_name[100]){
+struct song_node * remove_song (struct node *libary, char song_name[100], char artist_name[100]){
   struct node * current_song = library;
   struct node * placeholder;
-  if(strcmp(current_song->name,song_name)){ //if I have to remove front node, it's a special case
+  if(strcmp(current_song->name,song_name) + strcmp(current_song->artist,artist_name) == 0){ //if I have to remove front node, it's a special case
     library = library->next;
     free(current_song);
     return library;
   }
   while(current_song->next != NULL){ //else, loop through, checking if my next node has to be removed
-    if (current_song->next->i data){ //if it does have to be removed, relink neccesary nodes, and free node
+    if (strcmp(current_song->name,song_name) + strcmp(current_song->artist,artist_name) == 0){ //if it does have to be removed, relink neccesary nodes, and free node
       placeholder = p->next;
-      p->next = p->next->next;
-      p = p->next;
+      current_song->next = current_song->next->next;
+      current_song = current_song->next;
       free(placeholder);
-      return front;
+      return libray;
     } else{ //if not, move on to next node
-      p = p->next;
+      current_song = current_song->next;
     }
   }
-  return front;
+  return library;
 }
 
-/*struct node * free_list(struct node* p){
+struct song_node * free_list(struct node* library){
   struct node* sub;
   while (p!=NULL) {
-    sub=p;
-    printf("Freeing: %d\n", sub->i);
-    p=p->next;
+    sub=libary;
+    printf("Freeing: %d\n", libray->i);
+    libary=libary->next;
     free(sub);
   }
-  p=0;
   return p;
-}*/
-//JOSEPH DO WORK:
-/*struct song_node * pop_song(struct song_node *p, char song_name[100], char artist_name[100]){
-  struct node *delete=front;
-  struct node *reconnect;
-  if(delete==NULL){
-    return front;
-  }
-  if(delete->i==data){
-    front=front->next;
-    free(delete);
-    return front;
-  }
-  while (delete!=NULL && delete->i!=data) {
-    reconnect=delete;
-    delete=delete->next;
-  }
-  if(delete==NULL){
-    return front;
-  }else{
-    reconnect->next=delete->next;
-  }
-  free(delete);
-  return front;
-}*/
+}
