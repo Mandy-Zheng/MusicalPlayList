@@ -33,6 +33,7 @@ struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], c
   strcpy(pnew->name,song_name);
   strcpy(pnew->artist,artist_name);
   while(looper !=NULL){
+    printf("%d\n",strcmp(looper->artist,artist_name) );
     if(strcmp(looper->artist,artist_name)==0){
       if(strcmp(looper->name,song_name)>0){
         connectNodes(recorder,pnew,looper);
@@ -41,7 +42,8 @@ struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], c
         connectNodes(looper,pnew,looper->next);
         return p;
       }
-    }else if(strcmp(looper->artist,artist_name)>0){
+    }
+    if(strcmp(looper->artist,artist_name)>0){
       if(recorder==NULL){
         pnew->next=looper;
         return pnew;
@@ -49,12 +51,12 @@ struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], c
         connectNodes(recorder,pnew,looper);
         return p;
       }
-    }else{
-      connectNodes(looper,pnew,looper->next);
-      return p;
     }
     recorder=looper;
     looper=looper->next;
+  }
+  if(recorder!=NULL){
+    recorder->next=pnew;
   }
   return pnew;
 }
