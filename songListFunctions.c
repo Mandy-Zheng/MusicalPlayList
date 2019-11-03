@@ -107,16 +107,15 @@ struct song_node * find_first_song(struct song_node *p,char artist_name[100]){
 struct song_node * remove_song (struct song_node *library, char song_name[100], char artist_name[100]){
   struct song_node * current_song = library;
   struct song_node * placeholder;
-  if(strcmp(current_song->name,song_name) + strcmp(current_song->artist,artist_name) == 0){ //if I have to remove front node, it's a special case
+  if(strcmp(current_song->name,song_name) == 0 && strcmp(current_song->artist,artist_name) == 0){ //if I have to remove front node, it's a special case
     library = library->next;
     free(current_song);
     return library;
   }
   while(current_song->next != NULL){ //else, loop through, checking if my next node has to be removed
-    if (strcmp(current_song->name,song_name) + strcmp(current_song->artist,artist_name) == 0){ //if it does have to be removed, relink neccesary nodes, and free node
+    if (strcmp(current_song->next->name,song_name) == 0 && strcmp(current_song->next->artist,artist_name) == 0){ //if it does have to be removed, relink neccesary nodes, and free node
       placeholder = current_song->next;
       current_song->next = current_song->next->next;
-      current_song = current_song->next;
       free(placeholder);
       return library;
     } else{ //if not, move on to next node
@@ -135,4 +134,24 @@ struct song_node * free_library(struct song_node* library){
     free(sub);
   }
   return library;
+}
+
+struct song_node * random_song(struct song_node *p,char song_name[100], char artist_name[100]){
+  struct song_node *looper=p;
+  int size=0;
+  while(looper != NULL){
+      size++;
+      looper = looper->next;
+    }
+  srand(time(0));
+  random = rand()%size;\
+  int count = 0;
+  while(looper != NULL){
+    if(count ==  random){
+      return looper;
+    }
+    looper=looper->next;
+    count++;
+  }
+  return p;
 }
