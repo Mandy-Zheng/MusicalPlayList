@@ -136,22 +136,22 @@ struct song_node * free_library(struct song_node* library){
   return library;
 }
 
-struct song_node * random_song(struct song_node *p,char song_name[100], char artist_name[100]){
-  struct song_node *looper=p;
+struct song_node * random_song(struct song_node *library, int random){
+  struct song_node *looper=library;
   int size=0;
   while(looper != NULL){
       size++;
       looper = looper->next;
     }
-  srand(time(0));
-  random = rand()%size;\
+  random = random%size;
   int count = 0;
+  looper=library;
   while(looper != NULL){
-    if(count ==  random){
+    if(count == random){
       return looper;
     }
     looper=looper->next;
     count++;
   }
-  return p;
+  return library;
 }

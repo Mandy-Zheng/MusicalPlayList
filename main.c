@@ -9,6 +9,7 @@ int main() {
   char artists[10][100] = {"beatles","queen","elton john","neon trees","elton john","the vamps","beatles","lauv","healy","ajr"};
   struct song_node *library = NULL;
   struct song_node *finder = NULL;
+    struct song_node *random = NULL;
   int i;
   char fakesong[100] = "i want sleep";
   char fakeartist[100] = "amanda";
@@ -20,6 +21,13 @@ int main() {
     library = add_song_alphabet(library,songs[i],artists[i]);
     print_library(library);
   }
+
+  srand(time(0));
+  for (i = 0;i < 3; i++){
+    random = random_song(library, rand());
+    printf("\n\nReturn random song: %s, %s\n",random->name, random->artist);
+  }
+
   for (i = 0;i < 10; i++){
     printf("\n\nFinding: <%s>, <%s>, This is element %d\n",songs[i],artists[i],i);
     if( find_song(library,songs[i],artists[i]) !=NULL){
