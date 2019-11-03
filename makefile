@@ -1,18 +1,18 @@
-all: main.o songListFunctions.o
-	gcc -o program main.o songListFunctions.o
+all: main.o helperFunctions.o
+	gcc -o program main.o helperFunctions.o
 
 main.o: main.c songListHeader.h
 	gcc -c main.c
 
-songListFunctions.o: songListFunctions.c songListHeader.h
-	gcc -c songListFunctions.c
+helperFunctions.o: helperFunctions.c songListHeader.h
+	gcc -c helperFunctions.c
 clean:
 	rm *.o
 	rm *~
 run:
 	./program
-debug: main.c songListFunctions.c songListHeader.h
-	gcc -g -c main.c songListFunctions.c
+debug: main.c helperFunctions.c songListHeader.h
+	gcc -g -c main.c helperFunctions.c
 gdb:
 	gdb ./a.out
 valgrind:

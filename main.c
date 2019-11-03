@@ -14,12 +14,12 @@ int main() {
   char fakesong[100] = "i want sleep";
   char fakeartist[100] = "amanda";
   printf("\n\nInitial library <empty>\n");
-  print_library(library);
+  print_list(library);
 
   for (i = 0;i < 10; i++){
     printf("\n\nInserting: <%s>, <%s>, This is element %d\n",songs[i],artists[i],i);
-    library = add_song_alphabet(library,songs[i],artists[i]);
-    print_library(library);
+    library = add_node_alphabet(library,songs[i],artists[i]);
+    print_list(library);
   }
 
   srand(time(0));
@@ -36,21 +36,21 @@ int main() {
       printf("YOU SUCK\n" );
     }
   }
-  if( find_song(library,fakesong,fakeartist) !=NULL){
+  if( find_node(library,fakesong,fakeartist) !=NULL){
     printf("FOUND IT\n");
   }else{
     printf("YOU SUCK\n" );
   }
   for (i = 0;i < 10; i++){
     printf("\n\nFinding FIRST SONG OF: <%s>, This is element %d\n",artists[i],i);
-    finder=find_first_song(library,artists[i]);
+    finder=find_first_node(library,artists[i]);
     if( finder !=NULL){
       printf("YASSS QUEEN, %s\n", finder->name);
     }else{
       printf("DUMMY\n" );
     }
   }
-  if( find_first_song(library,fakeartist) !=NULL){
+  if( find_first_node(library,fakeartist) !=NULL){
     printf("YASSS QUEEN, %s\n", finder->name);
   }else{
     printf("Dummy" );
@@ -61,12 +61,12 @@ int main() {
 
     printf("\n\nRemoving: <%s>, <%s>\n",songs[i],artists[i]);
     library = remove_song(library, songs[i],artists[i]);
-    print_library(library);
+    print_list(library);
   }*/
-    library = free_library(library);
+    library = free_list(library);
     printf("\n\nEmptying library ... Printing Emptied library: \n");
-    library = free_library(library);
-    print_library(library);
+    library = free_list(library);
+    print_list(library);
 
   return 0;
 }
