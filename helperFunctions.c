@@ -23,7 +23,7 @@ void print_list(struct song_node *p){
     }
     temp=temp->next;
   }
-  printf("]");
+  printf("]\n");
 }
 struct song_node * add_node_alphabet(struct song_node *p, char song_name[100], char artist_name[100]){
   struct song_node *pnew;
