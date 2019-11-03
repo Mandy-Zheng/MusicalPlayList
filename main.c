@@ -19,14 +19,13 @@ int main() {
     print_library(library);
   }
 
-  /*for(i = 3; i < 7; i++){
-    library = remove_song(library, songs[i],artists[i]);
+  for(i = 3; i < 7; i++){
     printf("\n\nRemoving: <%s>, <%s>\n",songs[i],artists[i]);
+    library = remove_song(library, songs[i],artists[i]);
     print_library(library);
   }
-    library = free_library(library);
     printf("\n\nEmptying library ... Printing Emptied library: \n");
+    library = free_library(library);
     print_library(library);
-*/
   return 0;
 }
