@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 //struct song_node{
 //  char name[100];
 //  char artist[100];
@@ -24,11 +25,33 @@ void print_list(struct song_node *p){
 }
 struct song_node * add_song_alphabet(struct song_node *p, char song_name[100], char artist_name[100]){
   struct song_node *pnew;
-  struct song_node *looper
+  struct song_node *looper=p;
+  struct song_node *recorder;
   pnew=malloc(sizeof(struct song_node));
   pnew->name=song_name;
   pnew->artist=artist_name;
-  while()
+  boolean inserted=false;
+  while(looper !=NULL && inserted){
+    if(strcmp(looper->artist,artist_name)==0){
+      if(strcmp(looper->name,song_name)>0){
+        inserted=connectNodes(recorder,pnew,looper);
+      }else{
+        inserted=connectNodes(looper,pnew,looper->next);
+      }
+    }else if(strcmp(looper->artist,artist_name)>0){
+      inserted=connectNodes(recorder,pnew,looper);
+    }else{
+      inserted=connectNodes(looper,pnew,looper->next);
+    }
+    recorder=looper;
+    looper=loopoer->next
+  }
+  return p;
+}
+boolean connectNodes(struct song_node *p,struct song_node *q,struct song_node *r){
+  p->next=q;
+  q->next=r;
+  return true;
 }
 struct song_node * add_song(struct song_node *p, char song_name[100], char artist_name[100]){
   struct song_node *pnew;
@@ -38,8 +61,26 @@ struct song_node * add_song(struct song_node *p, char song_name[100], char artis
   pnew->next=p;
   return pnew;
 }
-
-
+struct song_node * find_song(struct song_node *p,char song_name[100], char artist_name[100]){
+  struct song_node *looper;
+  while(looper !=NULL){
+    if(strcmp(looper->artist,artist_name) == 0 && strcmp(looper->name,song_name) == 0){
+      return looper;
+    }
+    looper=looper->next;
+  }
+  return looper;
+}
+struct song_node * find_first_song(struct song_node *p,char artist_name[100]){
+  struct song_node *looper;
+  while(looper !=NULL){
+    if(strcmp(looper->artist,artist_name) == 0){
+      return looper;
+    }
+    looper=looper->next;
+  }
+  return looper;
+}
 /*struct node * free_list(struct node* p){
   struct node* sub;
   while (p!=NULL) {
