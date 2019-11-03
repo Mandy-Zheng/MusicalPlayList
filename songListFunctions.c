@@ -98,11 +98,11 @@ struct song_node * remove_song (struct song_node *library, char song_name[100], 
   }
   while(current_song->next != NULL){ //else, loop through, checking if my next node has to be removed
     if (strcmp(current_song->name,song_name) + strcmp(current_song->artist,artist_name) == 0){ //if it does have to be removed, relink neccesary nodes, and free node
-      placeholder = p->next;
+      placeholder = current_song->next;
       current_song->next = current_song->next->next;
       current_song = current_song->next;
       free(placeholder);
-      return libray;
+      return library;
     } else{ //if not, move on to next node
       current_song = current_song->next;
     }
@@ -112,11 +112,11 @@ struct song_node * remove_song (struct song_node *library, char song_name[100], 
 
 struct song_node * free_list(struct song_node* library){
   struct song_node* sub;
-  while (p!=NULL) {
-    sub=libary;
-    printf("Freeing: %d\n", libray->i);
-    libary=libary->next;
+  while (library!=NULL) {
+    sub=library;
+    printf("Freeing: %s, %s\n", library->name, library->artist);
+    library=library->next;
     free(sub);
   }
-  return p;
+  return library;
 }
