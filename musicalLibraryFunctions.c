@@ -45,7 +45,7 @@ void print_artist(struct song_node * library[27], char artist_name[100]){
 }
 void print_letter(struct song_node * library[27], char x){
   int i= x-97;
-  printf("%c list:\n",i);
+  printf("%c list:\n",x);
   print_list(library[i]);
   printf("\n");
 }
