@@ -26,10 +26,9 @@ void print_list(struct song_node *p){
   printf("]\n");
 }
 struct song_node * add_node_alphabet(struct song_node *p, char song_name[100], char artist_name[100]){
-  struct song_node *pnew;
+  struct song_node *pnew=calloc(sizeof(struct song_node),1);
   struct song_node *looper=p;
   struct song_node *recorder=NULL;
-  pnew=calloc(sizeof(struct song_node),1);
   strcpy(pnew->name,song_name);
   strcpy(pnew->artist,artist_name);
   pnew->next = NULL;
@@ -132,6 +131,15 @@ struct song_node * free_list(struct song_node* list){
   struct song_node* temp=list;
   while (list!=NULL) {
     printf("Freeing: %s, %s\n", list->name, list->artist);
+    temp=list;
+    list=list->next;
+    free(temp);
+  }
+  return list;
+}
+struct song_node * free_list_nonprint(struct song_node* list){
+  struct song_node* temp=list;
+  while (list!=NULL) {
     temp=list;
     list=list->next;
     free(temp);

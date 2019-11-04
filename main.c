@@ -36,6 +36,7 @@ int main() {
   for (i = 0;i < 3; i++){
     random = random_node(list,rand());
     printf("\nPrinting random node: %s, %s\n", random->artist, random->name);
+    random = NULL;
   }
 
   printf("_____________________________\n");
@@ -112,6 +113,7 @@ int main() {
   for (i = 0;i < 3; i++){
     random = random_list(library, random, rand());
     print_list(random);
+    random = free_list_nonprint(random);
   }
 
   printf("_____________________________\n");
@@ -192,6 +194,7 @@ printf("\n");
   library[0] = free_library(library);
   print_library(library);
 
+
   printf("\n_____________________________\n");
 
   printf("\n -- Testing adding songs by alphabet to an empty library -- \n");
@@ -200,5 +203,6 @@ printf("\n");
     library[0] = add_song_lib(library,songs[i],artists[i]);
     print_library(library);
   }
+  library[0] = free_library(library);
   return 0;
 }

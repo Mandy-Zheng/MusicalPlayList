@@ -113,15 +113,18 @@ struct song_node * random_list(struct song_node * library[27], struct song_node 
       size++;
     }
   }
-  size = randomseed%size;
-  struct song_node * randomsong;
+  size = rand()%size; //chooses a random length for the shuffle playlist
+  while(size==0){  //if shuffle playlist is 0, then randomly choose a shuffle playlist length until its not 0
+    size = rand()%size;
+  }
+  struct song_node * randomsong = NULL;
   for(i = 0; i < size; i++){
-    int random = randomseed%27;
+    int random = rand()%27; //chooses a random letter of the library
     while (library[random] == NULL){
       //printf("%d\n",random);
       random = rand()%27;
     }
-    randomsong = random_node(library[random],randomseed);
+    randomsong = random_node(library[random],random); //chose random song from that letter
     list = add_node_front(list,randomsong->name,randomsong->artist);
   }
   return list;
