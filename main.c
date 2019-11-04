@@ -6,8 +6,8 @@
 #include "musicalLibraryHeader.h"
 
 int main() {
-  char songs[8][100] = {"in my life","don't stop me now","tiny dancer","everybody talks","all night","1950","chasing fire","netflix trip"};
-  char artists[8][100] = {"beatles","queen","elton john","neon trees","the vamps","king princess","lauv","ajr"};
+  char songs[20][100] = {"in my life","let it be","don't stop me now","tiny dancer","everybody talks","all night","1950","chasing fire","netflix trip"};
+  char artists[20][100] = {"beatles","beatles","queen","elton john","neon trees","the vamps","king princess","lauv","ajr"};
   struct song_node *list = NULL;
   struct song_node * library[27];
   int i;
@@ -34,8 +34,8 @@ int main() {
   printf("\n -- Testing returning random nodes -- \n");
   srand(time(0));
   for (i = 0;i < 3; i++){
-    printf("\nPrinting shuffled playlist:\n");
-    print_list(random_node(list,rand()));
+    random = random_node(list,rand());
+    printf("\nPrinting random node: %s, %s\n", random->artist, random->name);
   }
 
   printf("_____________________________\n");
@@ -82,7 +82,6 @@ int main() {
 
     printf("\n -- Testing removing nodes -- \n");
   for(i = 3; i < 7; i++){
-    list = remove_node(list, songs[i],artists[i]);
     printf("\nRemoving: <%s>, <%s>\n",songs[i],artists[i]);
     list = remove_node(list, songs[i],artists[i]);
     print_list(list);
@@ -96,19 +95,16 @@ int main() {
 
   printf("\n\n====================================\nMUSICAL LIBRARY TESTS\n====================================\n\n");
 
-  printf(" -- Testing adding songs by alphabet -- \n");
-  printf("\nInitial library <empty>\n");
+  printf(" -- Testing printing Library -- \n");
+  printf("\nInitial library\n");
+  for (i = 0;i < 7; i++){
+    library[0] = add_song_lib(library,songs[i],artists[i]);
+  }
   print_library(library);
 
-  for (i = 0;i < 8; i++){
-    printf("\nInserting: <%s>, <%s>\n",songs[i],artists[i]);
-    library[0] = add_song_lib(library,songs[i],artists[i]);
-    print_library(library);
-  }
   printf("_____________________________\n");
 
-  printf("\n -- Testing returning random songs -- \n");
-  srand(time(0));
+  printf("\n -- Testing returning shuffled playlists -- \n");
   for (i = 0;i < 3; i++){
     random = random_list(library, random, rand());
     print_list(random);
@@ -171,7 +167,7 @@ for (i = 0;i < 3; i++){
   printf("\n_____________________________\n");
 
     printf("\n -- Testing removing songs -- \n");
-  for(i = 3; i < 7; i++){
+  for(i = 2; i < 6; i++){
     library[0] = remove_song(library, songs[i],artists[i]);
     printf("\nRemoving: <%s>, <%s>\n",songs[i],artists[i]);
     library[0] = remove_song(library, songs[i],artists[i]);
@@ -184,5 +180,13 @@ for (i = 0;i < 3; i++){
   library[0] = free_library(library);
   print_library(library);
 
+  printf("\n_____________________________\n");
+
+  printf("\n -- Testing adding songs by alphabet to an empty library -- \n");
+  for (i = 6;i < 8; i++){
+    printf("\nInserting: <%s>, <%s>\n",songs[i],artists[i]);
+    library[0] = add_song_lib(library,songs[i],artists[i]);
+    print_library(library);
+  }
   return 0;
 }
