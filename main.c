@@ -151,6 +151,22 @@ int main() {
     printf("Awww : %s not found\n", fakeartist);
   }
 
+  printf("\n_____________________________\n");
+
+printf("\n -- Testing finding the songs with artists starting with a certain letter -- \n");
+  printf("\n\nFinding songs of artists starting with the letter: <b>\n");
+  print_letter(library,'b');
+  printf("\n\nFinding songs of artists starting with the letter: <q>\n");
+  print_letter(library,'q');
+}
+
+printf("\n_____________________________\n");
+
+printf("\n -- Testing finding all songs by an artist -- \n");
+for (i = 0;i < 3; i++){
+  printf("\n\nFinding all songs of : <%s>\n",artists[i]);
+  print_artist(library, artists[i]);
+}
     printf("\n_____________________________\n");
 
     printf("\n -- Testing removing songs -- \n");
