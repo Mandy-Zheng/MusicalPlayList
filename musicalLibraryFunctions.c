@@ -15,9 +15,11 @@
 void print_library(struct song_node * library[27]){
   int i;
   for (i = 0; i < 27; i++) {
-    printf("%c list:\n",(library[i]->artist)[0]);
-    print_list(library[i]);
-    printf("\n");
+    if(library[i] != NULL){
+      printf("%c list:\n",(library[i]->artist)[0]);
+      print_list(library[i]);
+      printf("\n");
+    }
   }
 }
 
@@ -71,7 +73,8 @@ struct song_node * add_song_lib(struct song_node * library[27], char song_name[1
     return library[0];
   }else{
     if(artist_name[0]-97 == 0 ){
-      return add_node_alphabet(library[artist_name[0]-97], song_name, artist_name);
+      library[0] =  add_node_alphabet(library[artist_name[0]-97], song_name, artist_name);
+      return library[0];
     }else{
       library[artist_name[0]-97] = add_node_alphabet(library[artist_name[0]-97], song_name, artist_name);
       return library[0];

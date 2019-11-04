@@ -14,7 +14,7 @@ clean:
 run:
 	./program
 debug: main.c helperFunctions.c musicalLibraryFunctions.c
-	gcc -g -c main.c helperFunctions.c musicalLibraryFunctions.c
+	gcc -g main.c helperFunctions.c musicalLibraryFunctions.c
 gdb:
 	gdb ./a.out
 valgrind:

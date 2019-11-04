@@ -10,9 +10,12 @@ int main() {
   char artists[8][100] = {"beatles","queen","elton john","neon trees","the vamps","king princess","lauv","ajr"};
   struct song_node *list = NULL;
   struct song_node * library[27];
+  int i;
+  for(int i = 0;i < 27; i++){
+    library[i] = NULL;
+  }
   struct song_node *finder = NULL;
   struct song_node *random = NULL;
-  int i;
   char fakesong[100] = "i want sleep";
   char fakeartist[100] = "amanda";
 
@@ -99,11 +102,11 @@ int main() {
 
   for (i = 0;i < 8; i++){
     printf("\nInserting: <%s>, <%s>\n",songs[i],artists[i]);
-    library[0] = add_song_lib(library,songs[i],artists[i]);
+    add_song_lib(library,songs[i],artists[i]);
     print_library(library);
   }
   printf("_____________________________\n");
-
+    /*
   printf("\n -- Testing returning random songs -- \n");
   srand(time(0));
   for (i = 0;i < 3; i++){
@@ -181,6 +184,6 @@ for (i = 0;i < 3; i++){
   printf("Emptying library ... Printing Emptied library: \n");
   library[0] = free_library(library);
   print_library(library);
-
+  */
   return 0;
 }
