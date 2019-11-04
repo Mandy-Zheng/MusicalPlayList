@@ -50,7 +50,7 @@ int main() {
       printf("Unable to find: <%s>, <%s>\n", songs[i],artists[i]);
     }
   }
-  printf("\nFinding: <%s>, <%s>\n",artists[4],fakesong);
+  printf("\nFinding nonexistent: <%s>, <%s>\n",artists[4],fakesong);
   finder = find_node(list,fakesong,artists[4]);
   if(finder !=NULL){
     printf("FOUND IT: <%s>, <%s>\n",artists[4],fakesong);
@@ -70,7 +70,7 @@ int main() {
       printf("Awww : %s not found\n", artists[i]);
     }
   }
-  printf("\n\nFinding FIRST SONG OF: <%s>\n",fakeartist);
+  printf("\n\nFinding nonexistent FIRST SONG OF: <%s>\n",fakeartist);
   finder=find_artist_song(list,fakeartist);
   if (finder !=NULL){
     printf("WOO! %s found, their first song is: %s\n", fakeartist, finder->name);
@@ -82,11 +82,14 @@ int main() {
 
     printf("\n -- Testing removing nodes -- \n");
   for(i = 3; i < 7; i++){
-    list = remove_node(list, songs[i],artists[i]);
     printf("\nRemoving: <%s>, <%s>\n",songs[i],artists[i]);
     list = remove_node(list, songs[i],artists[i]);
     print_list(list);
   }
+  printf("\nRemoving non existent: <%s>, <%s>\n",fakesong,fakeartist);
+  list = remove_node(list, songs[i],artists[i]);
+  print_list(list);
+  printf("\n");
     printf("\n_____________________________\n");
 
   printf("\n -- Testing freeing list -- \n");
@@ -126,7 +129,7 @@ int main() {
       printf("Unable to find: <%s>, <%s>\n", songs[i],artists[i]);
     }
   }
-  printf("\nFinding: <%s>, <%s>\n",artists[4],fakesong);
+  printf("\nFinding nonexistent: <%s>, <%s>\n",artists[4],fakesong);
   finder = find_song_lib(library,fakesong,artists[4]);
   if(finder !=NULL){
     printf("FOUND IT: <%s>, <%s>\n",artists[4],fakesong);
@@ -146,7 +149,7 @@ int main() {
       printf("Awww : %s not found\n", artists[i]);
     }
   }
-  printf("\n\nFinding FIRST SONG OF: <%s>\n",fakeartist);
+  printf("\n\nFinding nonexistent FIRST SONG OF: <%s>\n",fakeartist);
   finder=find_artist_lib(library,fakeartist);
   if (finder !=NULL){
     printf("WOO! %s found, their first song is: %s\n", fakeartist, finder->name);
@@ -160,23 +163,31 @@ printf("\n -- Testing finding the songs with artists starting with a certain let
   print_letter(library,'b');
   printf("\n\nFinding songs of artists starting with the letter: <q>\n");
   print_letter(library,'q');
-
+  printf("\n\nFinding songs of artists starting with numbers:\n");
+  print_letter(library,'1');
 printf("\n_____________________________\n");
 
 printf("\n -- Testing finding all songs by an artist -- \n");
-for (i = 0;i < 3; i++){
+for (i = 0;i < 2; i++){
   printf("\n\nFinding all songs of : <%s>\n",artists[i]);
   print_artist(library, artists[i]);
 }
+printf("\n\nFinding nonexistent all songs of : amanda\n");
+print_artist(library, fakeartist);
+printf("\n");
   printf("\n_____________________________\n");
 
     printf("\n -- Testing removing songs -- \n");
-  for(i = 3; i < 7; i++){
+  for(i = 3; i < 6; i++){
     library[0] = remove_song(library, songs[i],artists[i]);
     printf("\nRemoving: <%s>, <%s>\n",songs[i],artists[i]);
     library[0] = remove_song(library, songs[i],artists[i]);
     print_library(library);
   }
+  printf("\nRemoving nonexistent: i want to sleep, amanda\n");
+  library[0] = remove_song(library, fakesong,fakeartist);
+  print_library(library);
+  printf("\n");
   printf("\n_____________________________\n");
 
   printf("\n -- Testing freeing library -- \n");
