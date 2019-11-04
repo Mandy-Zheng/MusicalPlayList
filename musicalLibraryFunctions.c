@@ -96,5 +96,5 @@ struct song_node * free_library(struct song_node * library[27]){
 
 struct song_node * random_song(struct song_node * library[27], int random){
   random = random%27;
-  return random_song(library[random],random);
+  return random_node(library[random],random);
 }

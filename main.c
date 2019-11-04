@@ -158,7 +158,6 @@ printf("\n -- Testing finding the songs with artists starting with a certain let
   print_letter(library,'b');
   printf("\n\nFinding songs of artists starting with the letter: <q>\n");
   print_letter(library,'q');
-}
 
 printf("\n_____________________________\n");
 
@@ -167,7 +166,7 @@ for (i = 0;i < 3; i++){
   printf("\n\nFinding all songs of : <%s>\n",artists[i]);
   print_artist(library, artists[i]);
 }
-    printf("\n_____________________________\n");
+  printf("\n_____________________________\n");
 
     printf("\n -- Testing removing songs -- \n");
   for(i = 3; i < 7; i++){
