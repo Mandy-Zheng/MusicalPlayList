@@ -52,9 +52,9 @@ void print_letter(struct song_node * library[27], char x){
 
 struct song_node * find_song_lib(struct song_node * library[27],char song_name[100], char artist_name[100]){
   if(artist_name[0]-97<0){
-    return find_song(library[26],song_name,artist_name);
+    return find_node(library[26],song_name,artist_name);
   }else{
-    return find_song(library[artist_name[0]-97],song_name,artist_name);
+    return find_node(library[artist_name[0]-97],song_name,artist_name);
   }
 }
 struct song_node * find_artist_lib(struct song_node * library[27],char artist_name[100]){
@@ -67,14 +67,14 @@ struct song_node * find_artist_lib(struct song_node * library[27],char artist_na
 
 struct song_node * add_song_lib(struct song_node * library[27], char song_name[100], char artist_name[100]){
   if(artist_name[0]-97<0){
-    add_node_alphabet(library[26], song_name, artist_name);
-    return library;
+    library[26] = add_node_alphabet(library[26], song_name, artist_name);
+    return library[0];
   }else{
     if(artist_name[0]-97 == 0 ){
       return add_node_alphabet(library[artist_name[0]-97], song_name, artist_name);
     }else{
-      add_node_alphabet(library[artist_name[0]-97], song_name, artist_name);
-      return library;
+      library[artist_name[0]-97] = add_node_alphabet(library[artist_name[0]-97], song_name, artist_name);
+      return library[0];
     }
   }
 
@@ -82,9 +82,9 @@ struct song_node * add_song_lib(struct song_node * library[27], char song_name[1
 
 struct song_node * remove_song (struct song_node * library[27], char song_name[100], char artist_name[100]){
   if(artist_name[0] - 97 < 0){
-    remove_node(library[26], song_name, artist_name)
+    remove_node(library[26], song_name, artist_name);
   }
-  remove_node(library[artist[0] - 97], song_name, artist_name)
+  remove_node(library[artist_name[0] - 97], song_name, artist_name);
 }
 
 struct song_node * free_library(struct song_node * library[27]){
@@ -96,5 +96,5 @@ struct song_node * free_library(struct song_node * library[27]){
 
 struct song_node * random_song(struct song_node * library[27], int random){
   random = random%27;
-  return random_song(library[random]);
+  return random_song(library[random],random);
 }
