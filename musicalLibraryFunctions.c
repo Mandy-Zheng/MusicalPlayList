@@ -25,7 +25,6 @@ void print_library(struct song_node * library[27]){
 
 void print_artist(struct song_node * library[27], char artist_name[100]){
   int index;
-  printf("%s list:\n",artist_name);
   if(artist_name[0]-97<0){
     index=26;
   }else{
@@ -45,7 +44,7 @@ void print_artist(struct song_node * library[27], char artist_name[100]){
   printf("]");
 }
 void print_letter(struct song_node * library[27], char x){
-  int i= x;
+  int i= x-97;
   printf("%c list:\n",i);
   print_list(library[i]);
   printf("\n");
@@ -84,16 +83,24 @@ struct song_node * add_song_lib(struct song_node * library[27], char song_name[1
 }
 
 struct song_node * remove_song (struct song_node * library[27], char song_name[100], char artist_name[100]){
-  if(artist_name[0] - 97 < 0){
-    remove_node(library[26], song_name, artist_name);
+  if(artist_name[0]-97<0){
+    library[26] = remove_node(library[26], song_name, artist_name);
+    return library[0];
+  }else{
+    if(artist_name[0]-97 == 0 ){
+      library[0] =  remove_node(library[artist_name[0]-97], song_name, artist_name);
+      return library[0];
+    }else{
+      library[artist_name[0]-97] = remove_node(library[artist_name[0]-97], song_name, artist_name);
+      return library[0];
+    }
   }
-  remove_node(library[artist_name[0] - 97], song_name, artist_name);
 }
 
 struct song_node * free_library(struct song_node * library[27]){
   int i = 0;
   for(i = 0; i < 27; i++){
-    free_list(library[0]);
+    free_list(library[i]);
   }
 }
 

@@ -106,14 +106,14 @@ int main() {
     print_library(library);
   }
   printf("_____________________________\n");
-    /*
+/*
   printf("\n -- Testing returning random songs -- \n");
   srand(time(0));
   for (i = 0;i < 3; i++){
     random = random_song(library, rand());
     printf("\nReturn random song: %s, %s\n",random->name, random->artist);
   }
-
+*/
   printf("_____________________________\n");
 
   printf("\n -- Testing find_song -- \n");
@@ -153,7 +153,6 @@ int main() {
   }else{
     printf("Awww : %s not found\n", fakeartist);
   }
-
   printf("\n_____________________________\n");
 
 printf("\n -- Testing finding the songs with artists starting with a certain letter -- \n");
@@ -178,12 +177,12 @@ for (i = 0;i < 3; i++){
     library[0] = remove_song(library, songs[i],artists[i]);
     print_library(library);
   }
-    printf("\n_____________________________\n");
+  printf("\n_____________________________\n");
 
   printf("\n -- Testing freeing library -- \n");
   printf("Emptying library ... Printing Emptied library: \n");
-  library[0] = free_library(library);
+  free_library(library);
   print_library(library);
-  */
+
   return 0;
 }

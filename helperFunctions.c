@@ -29,7 +29,7 @@ struct song_node * add_node_alphabet(struct song_node *p, char song_name[100], c
   struct song_node *pnew;
   struct song_node *looper=p;
   struct song_node *recorder=NULL;
-  pnew=malloc(sizeof(struct song_node));
+  pnew=calloc(sizeof(struct song_node),1);
   strcpy(pnew->name,song_name);
   strcpy(pnew->artist,artist_name);
   while(looper !=NULL){
@@ -75,7 +75,7 @@ void connectNodes(struct song_node *p,struct song_node *q,struct song_node *r){
 }
 struct song_node * add_node_front(struct song_node *p, char song_name[100], char artist_name[100]){
   struct song_node *pnew;
-  pnew=malloc(sizeof(struct song_node));
+  pnew=calloc(sizeof(struct song_node),1);
   strcpy(pnew->name,song_name);
   strcpy(pnew->artist,artist_name);
   pnew->next=p;
@@ -107,31 +107,34 @@ struct song_node * find_artist_song(struct song_node *p,char artist_name[100]){
 struct song_node * remove_node (struct song_node *list, char song_name[100], char artist_name[100]){
   struct song_node * current_song = list;
   struct song_node * placeholder;
-  if(strcmp(current_song->name,song_name) == 0 && strcmp(current_song->artist,artist_name) == 0){ //if I have to remove front node, it's a special case
-    list = list->next;
-    free(current_song);
-    return list;
-  }
-  while(current_song->next != NULL){ //else, loop through, checking if my next node has to be removed
-    if (strcmp(current_song->next->name,song_name) == 0 && strcmp(current_song->next->artist,artist_name) == 0){ //if it does have to be removed, relink neccesary nodes, and free node
-      placeholder = current_song->next;
-      current_song->next = current_song->next->next;
-      free(placeholder);
+  if(list != NULL){
+    if(strcmp(current_song->name,song_name) == 0 && strcmp(current_song->artist,artist_name) == 0){ //if I have to remove front node, it's a special case
+      list = list->next;
+      free(current_song);
       return list;
-    } else{ //if not, move on to next node
-      current_song = current_song->next;
+    }
+    while(current_song->next != NULL){ //else, loop through, checking if my next node has to be removed
+      if (strcmp(current_song->next->name,song_name) == 0 && strcmp(current_song->next->artist,artist_name) == 0){ //if it does have to be removed, relink neccesary nodes, and free node
+        placeholder = current_song->next;
+        current_song->next = current_song->next->next;
+        free(placeholder);
+        return list;
+      } else{ //if not, move on to next node
+        current_song = current_song->next;
+      }
     }
   }
-  return list;
+    return list;
 }
 
 struct song_node * free_list(struct song_node* list){
-  struct song_node* sub;
-  while (list!=NULL) {
-    sub=list;
-    printf("Freeing: %s, %s\n", list->name, list->artist);
-    list=list->next;
-    free(sub);
+  struct song_node* sub=list;
+  struct song_node* temp=sub;
+  while (sub!=NULL) {
+    printf("Freeing: %s, %s\n", sub->name, sub->artist);
+    temp=sub;
+    sub=sub->next;
+    free(temp);
   }
   return list;
 }
