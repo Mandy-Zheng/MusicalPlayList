@@ -32,6 +32,7 @@ struct song_node * add_node_alphabet(struct song_node *p, char song_name[100], c
   pnew=calloc(sizeof(struct song_node),1);
   strcpy(pnew->name,song_name);
   strcpy(pnew->artist,artist_name);
+  pnew->next = NULL;
   while(looper !=NULL){
     //printf("%d\n",strcmp(looper->artist,artist_name) );
     if(strcmp(looper->artist,artist_name)>0){
@@ -128,12 +129,11 @@ struct song_node * remove_node (struct song_node *list, char song_name[100], cha
 }
 
 struct song_node * free_list(struct song_node* list){
-  struct song_node* sub=list;
-  struct song_node* temp=sub;
-  while (sub!=NULL) {
-    printf("Freeing: %s, %s\n", sub->name, sub->artist);
-    temp=sub;
-    sub=sub->next;
+  struct song_node* temp=list;
+  while (list!=NULL) {
+    printf("Freeing: %s, %s\n", list->name, list->artist);
+    temp=list;
+    list=list->next;
     free(temp);
   }
   return list;

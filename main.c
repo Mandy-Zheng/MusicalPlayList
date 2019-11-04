@@ -34,8 +34,8 @@ int main() {
   printf("\n -- Testing returning random nodes -- \n");
   srand(time(0));
   for (i = 0;i < 3; i++){
-    random = random_node(list, rand());
-    printf("\nReturn random song: %s, %s\n",random->name, random->artist);
+    printf("\nPrinting shuffled playlist:\n");
+    print_list(random_node(list,rand()));
   }
 
   printf("_____________________________\n");
@@ -102,18 +102,18 @@ int main() {
 
   for (i = 0;i < 8; i++){
     printf("\nInserting: <%s>, <%s>\n",songs[i],artists[i]);
-    add_song_lib(library,songs[i],artists[i]);
+    library[0] = add_song_lib(library,songs[i],artists[i]);
     print_library(library);
   }
   printf("_____________________________\n");
-/*
+
   printf("\n -- Testing returning random songs -- \n");
   srand(time(0));
   for (i = 0;i < 3; i++){
-    random = random_song(library, rand());
-    printf("\nReturn random song: %s, %s\n",random->name, random->artist);
+    random = random_list(library, random, rand());
+    print_list(random);
   }
-*/
+
   printf("_____________________________\n");
 
   printf("\n -- Testing find_song -- \n");
@@ -181,7 +181,7 @@ for (i = 0;i < 3; i++){
 
   printf("\n -- Testing freeing library -- \n");
   printf("Emptying library ... Printing Emptied library: \n");
-  free_library(library);
+  library[0] = free_library(library);
   print_library(library);
 
   return 0;

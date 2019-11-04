@@ -7,4 +7,4 @@ struct song_node * find_artist_lib(struct song_node * library[27],char artist_na
 struct song_node * add_song_lib(struct song_node * library[27], char song_name[100], char artist_name[100]);
 struct song_node * remove_song (struct song_node * library[27], char song_name[100], char artist_name[100]);
 struct song_node * free_library(struct song_node * library[27]);
-struct song_node * random_song(struct song_node * library[27], int random);
+struct song_node * random_list(struct song_node * library[27], struct song_node * list, int random);

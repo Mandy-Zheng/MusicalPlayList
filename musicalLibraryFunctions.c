@@ -100,11 +100,29 @@ struct song_node * remove_song (struct song_node * library[27], char song_name[1
 struct song_node * free_library(struct song_node * library[27]){
   int i = 0;
   for(i = 0; i < 27; i++){
-    free_list(library[i]);
+    library[i] = free_list(library[i]);
   }
+  return library[0];
 }
 
-struct song_node * random_song(struct song_node * library[27], int random){
-  random = random%27;
-  return random_node(library[random],random);
+struct song_node * random_list(struct song_node * library[27], struct song_node * list,int randomseed){
+  int size = 0;
+  int i;
+  for(i = 0;i < 27; i++){
+    if(library[i] != NULL){
+      size++;
+    }
+  }
+  size = randomseed%size;
+  struct song_node * randomsong;
+  for(i = 0; i < size; i++){
+    int random = randomseed%27;
+    while (library[random] == NULL){
+      //printf("%d\n",random);
+      random = rand()%27;
+    }
+    randomsong = random_node(library[random],randomseed);
+    list = add_node_front(list,randomsong->name,randomsong->artist);
+  }
+  return list;
 }
