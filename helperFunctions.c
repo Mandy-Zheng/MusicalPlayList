@@ -4,7 +4,7 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
-#include "songListHeader.h"
+#include "helperFunctionsHeader.h"
 //struct song_node{
 //  char name[100];
 //  char artist[100];

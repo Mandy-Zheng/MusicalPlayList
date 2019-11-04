@@ -4,15 +4,15 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
-#include "songListHeader.h"
-#include "songListFunctions.c"
+#include "helperFunctionsHeader.h"
+
 //struct song_node{
 //  char name[100];
 //  char artist[100];
 //  struct song_node *next;
 //};
 
-void print_library(struct song_node library[27]){
+void print_library(struct song_node * library[27]){
   int i;
   for (i = 0; i < 27; i++) {
     printf("%c list:\n",(library[i]->artist)[0]);
@@ -21,7 +21,7 @@ void print_library(struct song_node library[27]){
   }
 }
 
-void print_artist(struct song_node library[27], char artist_name[100]){
+void print_artist(struct song_node * library[27], char artist_name[100]){
   int index;
   printf("%s list:\n",artist_name);
   if(artist_name[0]-97<0){
@@ -42,7 +42,7 @@ void print_artist(struct song_node library[27], char artist_name[100]){
   }
   printf("]");
 }
-void print_letter(struct song_node library[27], char x){
+void print_letter(struct song_node * library[27], char x){
   int i= x;
   printf("%c list:\n",i);
   print_list(library[i]);
@@ -50,14 +50,14 @@ void print_letter(struct song_node library[27], char x){
 }
 
 
-struct song_node * find_song_lib(struct song_node library[27],char song_name[100], char artist_name[100]){
+struct song_node * find_song_lib(struct song_node * library[27],char song_name[100], char artist_name[100]){
   if(artist_name[0]-97<0){
     return find_song(library[26],song_name,artist_name);
   }else{
     return find_song(library[artist_name[0]-97],song_name,artist_name);
   }
 }
-struct song_node * find_artist_lib(struct song_node library[27],char artist_name[100]){
+struct song_node * find_artist_lib(struct song_node * library[27],char artist_name[100]){
   if(artist_name[0]-97<0){
     return find_artist_song(library[26],artist_name);
   }else{
@@ -65,7 +65,7 @@ struct song_node * find_artist_lib(struct song_node library[27],char artist_name
   }
 }
 
-struct song_node * add_song_lib(struct song_node library[27], char song_name[100], char artist_name[100]){
+struct song_node * add_song_lib(struct song_node * library[27], char song_name[100], char artist_name[100]){
   if(artist_name[0]-97<0){
     add_node_alphabet(library[26], song_name, artist_name);
     return library;
@@ -94,7 +94,7 @@ struct song_node * free_library(struct song_node * library[27]){
   }
 }
 
-struct song_node * random_song(struct song_node *library, int random){
+struct song_node * random_song(struct song_node * library[27], int random){
   random = random%27;
   return random_song(library[random]);
 }
